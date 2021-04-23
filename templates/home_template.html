@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="content-wrapper d-flex align-items-center auth">
+    <div class="row flex-grow">
+        <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+                <div class="brand-logo">
+                    <center>
+                        {% include 'logo.html' %}
+                    </center>
+                </div>
+                <div id="loginForm">
+                    <h4 id="titleLogin">Benvenuto in Filetto</h4>
+                    <h6 id="subTitleLogin" class="font-weight-light">Inserisci i valori richiesti per iniziare</h6>
+                    <form class="pt-3" action="." method="post" id="formLogin">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-5"><center><i>Numero righe</i></center></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5"><center><i>Numero colonne</i></center></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-5"><input type="number" class="form-control form-control-lg" id="nRighe" name="nRighe" required></div>
+                            <div class="col-md-2" style="margin-top: 2.5%"><center>X</center></div>
+                            <div class="col-md-5"><input type="number" class="form-control form-control-lg" id="nColonne" name="nColonne" required></div>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Inizia il gioco</button>
+                        </div>
+                    </form>
+                    <hr>
+                    {% if game_list %}
+                        <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                                <th scope="col">Ultimo aggiornamento</th>
+                                <th scope="col">Punti giocatore 1</th>
+                                <th scope="col">Punti giocatore 2</th>
+                            </thead>
+                            <tbody>
+                                {% for game in game_list %}
+                                    <tr>
+                                        <td>{{ game.dateLastUpdate }}</td>
+                                        <td>{{ game.player1point }}</td>
+                                        <td>{{ game.player2point }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Filetto</title>
+    <!-- plugins:css -->
+    {% include 'style.html' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+</body>
+<div class="modal" id="loading" tabindex="-1" role="dialog" style="z-index: 1000" data-backdrop="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="http://www.hrcsrl.net/veronica/preloader.gif" style="width: 100%" />
+              </div>
+            </div>
+          </div>
+        </div>
+</html>
