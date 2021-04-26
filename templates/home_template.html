@@ -3,7 +3,7 @@
 {% block content %}
 <div class="content-wrapper d-flex align-items-center auth">
     <div class="row flex-grow">
-        <div class="col-lg-4 mx-auto">
+        <div class="col-lg-8 mx-auto">
             <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
                     <center>
@@ -11,8 +11,10 @@
                     </center>
                 </div>
                 <div id="loginForm">
-                    <h4 id="titleLogin">Benvenuto in Filetto</h4>
-                    <h6 id="subTitleLogin" class="font-weight-light">Inserisci i valori richiesti per iniziare</h6>
+                    <center>
+                        <h4 id="titleLogin">Benvenuto in Filetto</h4>
+                        <h6 id="subTitleLogin" class="font-weight-light">Inserisci i valori richiesti per iniziare</h6>
+                    </center>
                     <form class="pt-3" action="." method="post" id="formLogin">
                         {% csrf_token %}
                         <div class="row">
@@ -34,9 +36,11 @@
                         <div class="row">
                         <table class="table table-striped">
                             <thead>
-                                <th scope="col">Ultimo aggiornamento</th>
-                                <th scope="col">Punti giocatore 1</th>
-                                <th scope="col">Punti giocatore 2</th>
+                                <th scope="col"><b>Ultimo aggiornamento</b></th>
+                                <th scope="col"><b>Punti giocatore 1</b></th>
+                                <th scope="col"><b>Punti giocatore 2</b></th>
+                                <th scope="col"><b>Stato</b></th>
+                                <th scope="col"><b>Azione</b></th>
                             </thead>
                             <tbody>
                                 {% for game in game_list %}
@@ -44,6 +48,8 @@
                                         <td>{{ game.dateLastUpdate }}</td>
                                         <td>{{ game.player1point }}</td>
                                         <td>{{ game.player2point }}</td>
+                                        <td>{{ game.status_string }}</td>
+                                        <td><a href="{{ game.src }}">{{ game.href_btn }}</a></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

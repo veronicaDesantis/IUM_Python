@@ -24,6 +24,8 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
-    path('game_view/<id>', views.game_view, name='game_view'),
-    path('game_view_post/', views.game_view_post, name='game_view_post')
+    path('game_view/<_id>', views.game_view, name='game_view'),
+    path('game_view_post/', views.game_view_post, name='game_view_post'),
+    path('leave_1/', views.leave_1, name='leave1'),
+    path('leave_2/', views.leave_2, name='leave2')
 ]

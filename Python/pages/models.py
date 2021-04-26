@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Game(models.Model):
     nRighe = models.IntegerField()
     nColonne = models.IntegerField()
@@ -8,6 +9,7 @@ class Game(models.Model):
     status = models.IntegerField()
     dateStart = models.DateTimeField()
     dateLastUpdate = models.DateTimeField()
+
 
 class Move(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)

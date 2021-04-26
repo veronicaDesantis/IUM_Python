@@ -1,5 +1,3 @@
-from sre_parse import _class_escape
-
 
 class GameDetail():
     id = int
@@ -9,6 +7,8 @@ class GameDetail():
     player2point = int
     matrix = []
     move_to = int
+    isFinished = bool
+    wonBy = int
 
     def __init__(self, id, player1point, player2point, nColonne, nRighe, matrix, move_to):
         self.player1point = player1point
@@ -18,6 +18,8 @@ class GameDetail():
         self.nRighe = nRighe
         self.matrix = matrix
         self.move_to = move_to
+        self.isFinished = 0
+        self.wonBy = 0
 
 
 
@@ -32,9 +34,9 @@ class MoveDetail():
         self.player_type = player_type
         self.nRighe = nRighe
         self.nColonne = nColonne
-        if (self.player_type == 0):
+        if self.player_type == 0:
             self.cValue = "player_none"
-        elif (self.player_type == 1):
+        elif self.player_type == 1:
             self.cValue = "player_one"
-        elif (self.player_type == 2):
+        elif self.player_type == 2:
             self.cValue = "player_two"

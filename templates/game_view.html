@@ -9,14 +9,25 @@
 <script>
     function valueForm(index_row, column_row, cValue)
     {
-        if (cValue == 'player_none') {
-            $("#loading").show();
-            $(".container-scroller").css("filter", "blur(10px)");
-            $("#index_row").val(index_row);
-            $("#index_column").val(column_row);
-            $("#gameForm").submit();
+        if ($("#is_finished").val() == "0") {
+            if (cValue == 'player_none') {
+                $("#loading").show();
+                $(".container-scroller").css("filter", "blur(10px)");
+                $("#index_row").val(index_row);
+                $("#index_column").val(column_row);
+                $("#gameForm").submit();
+            }
         }
     }
+
+    function SubmitLeave2(){
+        $("#leave2").submit();
+    }
+
+    function SubmitLeave1(){
+        $("#leave1").submit();
+    }
+
 </script>
 <div class="content-wrapper d-flex align-items-center auth">
     <div class="row flex-grow">
@@ -26,34 +37,61 @@
                     <form class="pt-3" action="/game_view_post/" method="post" id="gameForm">
                         {% csrf_token %}
                         <input type="hidden" name="game_id" id="game_id" value="{{ game_detail.id }}">
+                        <input type="hidden" name="is_finished" id="is_finished" value="{{ game_detail.isFinished }}">
                         <input type="hidden" name="index_row" id="index_row">
                         <input type="hidden" name="index_column" id="index_column">
                         <div class="form-group">
                         <center class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-sm-12">
                                          <span class="badge badge-player-one">Player 1</span>
                                         <br>
                                         <br>
                                         Punteggio: <span class="badge badge-info">{{ game_detail.player1point }}</span>
+                                        <br>
+                                        <br>
+                                        {% if game_detail.move_to == 1 or game_detail.move_to == 2 %}
+                                            <button type="button" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="SubmitLeave1()">Abbandona il gioco</button>
+                                        {% endif %}
+                                        <br>
+                                        <br>
+                                        {% if game_detail.wonBy == 1 %}
+                                            <span class="badge badge-player-one">Hai vinto!</span>
+                                        {% endif %}
+                                        {% if game_detail.wonBy == 2 %}
+                                                <span class="badge badge-player-one">Hai perso..</span>
+                                            {% endif %}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <center>
                                             {% include 'logo.html' %}
                                         </center>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-sm-12">
                                         <span class="badge badge-player-two">Player 2</span>
                                          <br>
                                          <br>
                                         Punteggio: <span class="badge badge-info">{{ game_detail.player2point }}</span>
+                                        <br>
+                                        <br>
+                                        {% if game_detail.move_to == 1 or game_detail.move_to == 2 %}
+                                            <button type="button" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="SubmitLeave2()">Abbandona il gioco</button>
+                                        {% endif %}
+                                        <br>
+                                        <br>
+                                        {% if game_detail.wonBy == 2 %}
+                                            <span class="badge badge-player-two">Hai vinto!</span>
+                                        {% endif %}
+                                        {% if game_detail.wonBy == 1 %}
+                                                <span class="badge badge-player-two">Hai perso..</span>
+                                            {% endif %}
                                     </div>
                                     <br>
                                     <br>
                                     <br>
                                     <div class="col-md-3"></div>
-                                    <div class="col-md-6 mt-5">
+                                    <div class="col-md-6 mt-5 col-sm-12">
                                         <center>
                                             {% if game_detail %}
                                                 {% for m in game_detail.matrix  %}
@@ -87,7 +125,22 @@
                                 </center>
                             </div>
                         </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{%  url "home" %}">Torna alla lista</a>
+                            </div>
                         </div>
+                        </div>
+                    </form>
+                    <form id="leave1" action="/leave_1/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="game_id" id="game_id" value="{{ game_detail.id }}">
+                    </form>
+                    <form id="leave2" action="/leave_2/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="game_id" id="game_id" value="{{ game_detail.id }}">
                     </form>
                 </div>
             </div>
