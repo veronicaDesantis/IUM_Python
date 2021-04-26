@@ -57,6 +57,8 @@ def GameFactory(_id):
         # update the db entity
         update_game_status(_id=_id, status=int(StatusType.WON_BY_PLAYER_2))
         game_detail.move_to = 0
+    if game.status == int(StatusType.LEAVED_BY_PLAYER_1) or game.status == int(StatusType.LEAVED_BY_PLAYER_2):
+        game_detail.isFinished = 1
     return game_detail
 
 

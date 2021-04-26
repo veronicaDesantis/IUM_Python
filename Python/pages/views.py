@@ -20,7 +20,7 @@ def home_view(request, *args, **kwargs):
         nRow = request.POST['nRighe']
         nColumns = request.POST['nColonne']
         _id = insert_game(nRow, nColumns, datetime, datetime)
-        return redirect('game_view', id=_id)
+        return redirect('game_view', _id=_id)
     return render(request, "home_template.html", context)
 
 
@@ -37,19 +37,16 @@ def game_view_post(request, *args, **kwargs):
     move_to = request.POST["move_to"]
     game_ = get_game(_id)
     insert_move(game=game_, index_row=index_row, index_column=index_column, move_to=move_to)
-    context = {'game_detail': GameFactory(_id)}
-    return render(request, "game_view.html", context)
+    return redirect('game_view', _id=_id)
 
 
 def leave_1(request, *args, **kwargs):
     _id = request.POST["game_id"]
     update_game_status(_id=_id, status=int(StatusType.LEAVED_BY_PLAYER_1))
-    context = {'game_detail': GameFactory(_id)}
-    return render(request, "game_view.html", context)
+    return redirect('game_view', _id=_id)
 
 
 def leave_2(request, *args, **kwargs):
     _id = request.POST["game_id"]
     update_game_status(_id=_id, status=int(StatusType.LEAVED_BY_PLAYER_2))
-    context = {'game_detail': GameFactory(_id)}
-    return render(request, "game_view.html", context)
+    return redirect('game_view', _id=_id)

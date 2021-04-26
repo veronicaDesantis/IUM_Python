@@ -9,6 +9,7 @@ class GameDetail():
     move_to = int
     isFinished = bool
     wonBy = int
+    percentage = int
 
     def __init__(self, id, player1point, player2point, nColonne, nRighe, matrix, move_to):
         self.player1point = player1point
@@ -20,6 +21,7 @@ class GameDetail():
         self.move_to = move_to
         self.isFinished = 0
         self.wonBy = 0
+        self.percentage = 100 / self.nColonne
 
 
 

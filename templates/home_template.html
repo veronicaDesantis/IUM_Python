@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="content-wrapper d-flex align-items-center auth">
+<div class="content-wrapper d-flex align-items-center auth" style="overflow: scroll">
     <div class="row flex-grow">
         <div class="col-lg-8 mx-auto">
             <div class="auth-form-light text-left p-5">
@@ -49,7 +49,11 @@
                                         <td>{{ game.player1point }}</td>
                                         <td>{{ game.player2point }}</td>
                                         <td>{{ game.status_string }}</td>
-                                        <td><a href="{{ game.src }}">{{ game.href_btn }}</a></td>
+                                        <td>
+                                            <a href="{{ game.src }}" class="btn btn-2px btn-primary">
+                                                <span class="material-icons">open_in_browser</span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
