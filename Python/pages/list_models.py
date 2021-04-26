@@ -29,6 +29,4 @@ class GameList():
             self.status_string = "Abbandonata dal Player 1"
         elif self.status == int(StatusType.LEAVED_BY_PLAYER_2):
             self.status_string = "Abbandonata dal Player 2"
-        if self.status == int(StatusType.INITIATED):
-            self.href_btn = "Riprendi"
-            self.src = "/game_view/" + str(_id)
+        self.src = "/game_view/" + str(_id)
